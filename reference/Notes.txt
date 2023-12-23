@@ -1,0 +1,18 @@
+git config --global user.name "Ganesh Muni"
+git config --global user.email "ganeshmaximus95@gmail.com"
+
+python -m venv sensor_venv
+
+# set execution Policy
+Set-ExecutionPolicy Unrestricted
+
+pip install virtualenv
+python -V  # Python 3.9.12
+virtualenv flask_env
+
+----->
+pip freeze > ./reference/requirements.txt
+
+------------->  with anaconda
+conda create --name flask_env python=3.9.12
+conda activate flask_env

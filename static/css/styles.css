@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(255, 244, 230);
+    margin: 0%;
+    padding: 0%;
+    width:100%;
+    box-sizing: border-box;
+}
+body, h1, h2, h3, p, ul, li, span {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+img.logo{
+    max-width: 35px;
+    display: inline-block;
+    vertical-align: top;
+}
+.header-wrapper{
+    display: block;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(4, 25, 44);
+    color: rgb(255, 255, 255);
+    margin: auto;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.hw-left{
+    display: inline-block;
+    width: 15%;
+    /* background-color: rgb(255, 255, 255); */
+    vertical-align: middle;
+}
+.hw-mid{
+    display: inline-block;
+    width: 60%;
+    margin: auto;
+    /* background-color: bisque; */
+}
+.hw-right{
+    display: inline-block;
+    width: 20%;
+    min-height: 1px;
+    /*background-color: blanchedalmond;*/
+}
+footer {
+    background-color: #333; /* Set the background color */
+    color: #fff; /* Set the text color */
+    padding: 10px; /* Add some padding for spacing */
+    text-align: center; /* Center the text */
+    position: fixed; /* Fixed position at the bottom */
+    width: 100%; /* Full width */
+    bottom: 0; /* Stick to the bottom */
+}

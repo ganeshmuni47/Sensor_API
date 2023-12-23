@@ -1,4 +1,5 @@
-git config --global user.name "Ganesh Muni"
-git config --global user.email "ganeshmaximus95@gmail.com"
+
 
 python 3.11.5
+
+pip freeze > ./reference/requirements.txt
