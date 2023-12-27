@@ -33,6 +33,7 @@ class dbconn:
         cursor = conn.execute(text(sql_query).execution_options(autocommit=True))
         data = cursor.fetchall()
         keys = list(cursor.keys())
+        conn.close()
         return keys,data
 
 class sql_utils:
@@ -41,12 +42,18 @@ class sql_utils:
         result_dicts = [dict(zip(keys, row)) for row in data]
         return result_dicts
 
-    def sql_to_html(sql_query):
+    def sql_to_html(sql_query,static_path=None):
         keys,data = dbconn.sql_select(sql_query)
         result_dicts = [dict(zip(keys, row)) for row in data]
         df = pd.DataFrame(result_dicts)
         df.columns = [items.upper() for items in list(df.columns)]
-        html_str = df.to_html(index=True,table_id='data_table')
+        html_str = df.to_html(index=False,table_id='data_table')
+        if(static_path != None):
+            df.to_csv(f"{static_path}\\temp_data\\temp.csv", index=False)
         return html_str
     
     sql_1 = """select * from sensor_data_v"""
+    sql_2 = """select * from sensors_database.sensor_data_v
+        where sensor_type like '{2}'
+        and read_date >= '{0}'
+        and read_date <= '{1}'"""

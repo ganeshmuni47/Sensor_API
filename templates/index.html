@@ -11,7 +11,7 @@
         <div class="header-wrapper">
             <div class="hw-left">
                 <img src="{{url_for('static',filename='media/flow_sensor1.png')}}" alt="logo image" class="logo">
-                <h3 style="display: inline-block; font-size: 25px; margin-top: 0px;">aaa aaan  </h3>
+                <h3 style="display: inline-block; font-size: 25px; margin-top: 0px;"></h3>
             </div>
             <div class="hw-mid">
                 <h3 style="font-size: 25px;">Sensor Reading Application</h3>
@@ -20,18 +20,31 @@
             </div>
         </div>
         <div class="control-panel">
-            <form action="control-submit" class="controls">
-                <input type="button" value="submit">
+            <form action="/" method="POST" class="controls">
+                <label for="date-from">Date From: </label>
+                <input type="date" name="date-from" id="date-from" value="{{ data['date_from'] }}" required>
+
+                <label for="date-To">Date To: </label>
+                <input type="date" name="date-to" d="date-to" value="{{ data['date_to'] }}" required>
+
+                <label for="select-sensor">Sensor Type: </label>
+                <select name="sensor-type" id="select-sensor" required>
+                    <option value="%">All Selected</option Selected>
+                    <option value="Test Sensor">Test Sensor</option>
+                    <option value="Force Sensor">Force Sensor</option>
+                    <option value="Temperature Sensor">Temperature Sensor</option>
+                    <option value="Fluid Sensor">Fluid Sensor</option>
+                  </select>
+
+                <input type="submit" name="submit" value="Submit">
+                <input type="submit" name="download" value="Download" >
             </form>
         </div>
     </header>
     <main>
         <div class="main-left">
-            <h3>Sensor Data Results</h3>
+            <h3>Showing Data for {{ data['sensor_type'] }}, From: {{ data['date_from'] }} To: {{ data['date_to'] }}</h3><br>
             {{ table_data|safe}}
-        </div>
-        <div class="main-right">
-
         </div>
     </main>
     <footer>

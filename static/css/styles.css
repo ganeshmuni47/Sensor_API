@@ -27,25 +27,25 @@ img.logo{
 }
 .hw-left{
     display: inline-block;
-    width: 15%;
+    width: 5%;
     /* background-color: rgb(255, 255, 255); */
     vertical-align: middle;
 }
 .hw-mid{
     display: inline-block;
-    width: 60%;
+    width: 65%;
     margin: auto;
     vertical-align: middle;
     /* background-color: bisque; */
 }
 .hw-right{
     display: inline-block;
-    width: 24%;
+    width: 29%;
     min-height: 1px;
     /*background-color: blanchedalmond;*/
 }
 div.control-panel{
-    background-color: #10857f;
+    background-color: #b7e8fc;
     display: flex;
     box-sizing: border-box;
     height: 50px;
@@ -55,14 +55,15 @@ div.control-panel{
 }
 div.main-left{
     display: inline-block;
-    width: 70%;
-    min-height: 80vh;
+    width: 100%;
+    padding: 10px 10% 10px 10%;
+    box-sizing: border-box;
 }
-div.main-right{
+/* div.main-right{
     display: inline-block;
-    width: 30%;
+    width: 50%;
     height: 100%;
-}
+} */
 main{
     padding-bottom: 5vh;
 }
@@ -71,22 +72,22 @@ main{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    font-size: 12px;
+    font-size: 15px;
 }
 #data_table td, #data_table th {
-border: 1px solid #000000;
-padding: 2px;
+border: 0px solid #727272;
+padding: 5px;
 /* background-color: white; */
 }
-#data_table tr:nth-child(even){background-color: #fff2db;}
+#data_table tr:nth-child(even){background-color: #f2f7f8;}
 #data_table tr:hover {background-color: #ddd;}
 #data_table th {
 padding-top: 4px;
 padding-bottom: 4px;
 text-align: left;
-background-color: #14161a;
+background-color: #09192c;
 color: white;
-font-size: 14px;
+font-size: 15px;
 }
 footer {
     background-color: #333; /* Set the background color */

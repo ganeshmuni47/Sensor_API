@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for, jsonify, abort
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify, abort, send_file
 # from flask_sqlalchemy import SQLAlchemy
 import json
 from datetime import datetime
@@ -12,6 +12,7 @@ from sqlalchemy import text
 import pandas as pd
 
 app = Flask(__name__)
+app.secret_key = '1uybRXm+ZiS+L/yaoC4='
 static_path = os.path.abspath("./static")
 app.config['UPLOAD_FOLDER'] = os.path.join(static_path, 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
@@ -19,11 +20,58 @@ max_upload_size = 5 #in MB
 print(app.config['UPLOAD_FOLDER'])
 server_name = 'localhost'
 
-@app.route('/')
+page_defaults = {
+    "date_from" : datetime.today().strftime("%Y-%m-%d"),
+    "date_to" : datetime.today().strftime("%Y-%m-%d"),
+    "sensor_type" : "%"
+}
+
+@app.route('/',methods=["GET", "POST"])
 def index():
-    sensor_data = utils.sql_utils.sql_to_html(utils.sql_utils.sql_1)
-    print(sensor_data)
-    return render_template('index.html',table_data = sensor_data)
+    if(request.method=="POST"):
+        print("#== Method POST ==#")
+        if(request.form.get('submit')):
+            date_from = request.form['date-from']
+            date_to = request.form['date-to']
+            sensor_type = request.form['sensor-type']
+            sensor_data = utils.sql_utils.sql_to_html(utils.sql_utils.sql_2.format(date_from,date_to,sensor_type),static_path)
+            if(sensor_type=='%'):
+                sensor_type_file = 'All'
+            else:
+                sensor_type_file = sensor_type
+            session['data']['date_from'] = date_from
+            session['data']['date_to'] = date_to
+            session['data']['sensor_type'] = sensor_type_file
+            return render_template('index.html',table_data = sensor_data, data = session['data'])
+        
+        if(request.form.get('download')):
+            date_from = request.form['date-from']
+            date_to = request.form['date-to']
+            sensor_type = request.form['sensor-type']
+            sensor_data = utils.sql_utils.sql_to_html(utils.sql_utils.sql_2.format(date_from,date_to,sensor_type),static_path)
+            path = static_path+"\\temp_data\\temp.csv"
+            if(sensor_type=='%'):
+                sensor_type_file = 'All'
+            else:
+                sensor_type_file = sensor_type
+            file_name = f"SensorData_{sensor_type_file}_{date_from}_{date_to}.csv"
+            return send_file(path, as_attachment=True, download_name=file_name)
+    else:
+        session['data'] = {}
+        date_from = page_defaults['date_from']
+        date_to = page_defaults['date_to']
+        sensor_type = "%"
+        sensor_data = utils.sql_utils.sql_to_html(utils.sql_utils.sql_2.format(date_from,date_to,sensor_type),static_path)
+        sensor_type_file = ''
+        if(sensor_type=='%'):
+            sensor_type_file = 'All'
+        else:
+            sensor_type_file = sensor_type
+        session['data']['date_from'] = date_from
+        session['data']['date_to'] = date_to
+        session['data']['sensor_type'] = sensor_type_file
+
+        return render_template('index.html',table_data = sensor_data, data = session['data'])
 
 # Reading Data
 # http://localhost:8008/send_data/test_sensor/?data={%22value%22:30.1}
