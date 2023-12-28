@@ -57,3 +57,5 @@ class sql_utils:
         where sensor_type like '{2}'
         and read_date >= '{0}'
         and read_date <= '{1}'"""
+    sql_3 = """select * from sensors_database.sensor_data_v
+        where sensor_type like '{0}' limit 50"""

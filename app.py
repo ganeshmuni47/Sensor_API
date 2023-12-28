@@ -101,5 +101,15 @@ def send_data(sensor_type):
             }
             return jsonify(response), 400
         
+@app.route('/live', methods=["GET","POST"])
+def live():
+    return render_template('live.html')
+
+@app.route('/live_data/<sensor_type>/', methods=["GET","POST"])
+def live_data(sensor_type):
+    sensor_data = utils.sql_utils.sql_to_dict(utils.sql_utils.sql_3.format(sensor_type))
+    return sensor_data
+
+
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0', port=8008)

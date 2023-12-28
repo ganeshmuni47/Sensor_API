@@ -56,7 +56,7 @@ div.control-panel{
 div.main-left{
     display: inline-block;
     width: 100%;
-    padding: 10px 10% 10px 10%;
+    padding: 10px 5% 10px 5%;
     box-sizing: border-box;
 }
 /* div.main-right{
@@ -97,4 +97,10 @@ footer {
     position: fixed; /* Fixed position at the bottom */
     width: 100%; /* Full width */
     bottom: 0; /* Stick to the bottom */
+}
+.live-chart{
+    display: inline-block;
+    width: 50%;
+    height: 40%;
+    box-sizing: border-box;
 }
